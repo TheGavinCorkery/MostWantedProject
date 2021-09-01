@@ -15,7 +15,32 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
-      // TODO: search by traits
+      let filter = promptFor('What do you want to look for? Enter gender, dob, height, weight, eyeColor, occupation', autoValid).toLowerCase();
+      switch(filter){
+        case 'gender':
+          //Call the function to filter based on gender
+          break;
+        case 'dob':
+          //Call the function to filter based on date of birth
+          break;
+        case 'height':
+        //Call the function to filter based on height
+          break;
+        case 'weight':
+          //Call function to filter based on weight
+          break;
+        case 'eyecolor':
+          let peopleWithEyeColor = searchByEyeColor(people);
+          let namesOfPeople = '';
+          for (let i = 0; i < peopleWithEyeColor.length; i++) {
+            namesOfPeople += `${peopleWithEyeColor[i].firstName.toString()} ${peopleWithEyeColor[i].lastName.toString()}, `;
+          }
+          alert(`People with this color eyes: ${namesOfPeople}`);
+          break;
+        case 'occupation':
+          //Call the function to filter based on occupation
+          break;
+      }
       break;
       default:
     app(people); // restart app
@@ -25,7 +50,6 @@ function app(people){
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
   mainMenu(searchResults, people);
 }
-
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
 
@@ -84,7 +108,16 @@ function searchByName(people){
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
 function searchByEyeColor(people){
-
+  let eyeColor = promptFor("What color eyes do you want to look for? Enter 'black', 'brown', 'hazel', 'blue', 'green", autoValid);
+  let peopleWithEyeColor = people.filter(function(element) {
+    if (element.eyeColor === eyeColor){
+      return true;
+    }
+    else{
+      return false;
+    }
+  });
+  return peopleWithEyeColor;
 }
 
 //TODO: add other trait filter functions here.
