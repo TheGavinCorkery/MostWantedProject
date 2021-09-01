@@ -94,6 +94,7 @@ function mainMenu(person, people){
     // TODO: get person's family
     break;
     case "descendants":
+
       let childrenIds = findChildrenIds(person[0].id, people);
       console.log(childrenIds);
     break;
@@ -248,12 +249,21 @@ function findChildrenIds (parentId, people) {
       if (element.parents[x] == parentId){
         return element.id;
       }
+    }    
+  })
+
+  let grandkids = people.filter(function(element) {
+    for (let i = 0; i < arrayOfChildrenIds.length; i++) {
+      if (element.parents[i] == arrayOfChildrenIds[i].id){
+        return element.id;
+      }
     }
-
-  });
+  })
+  for (let x = 0; x < grandkids.length; x++) {
+    arrayOfChildrenIds.pop(grandkids[x]);
+  }
   return arrayOfChildrenIds;
-};
-
+}
 //#endregion
 
 
