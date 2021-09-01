@@ -32,7 +32,7 @@ function app(people){
           for (let i = 0; i < dobOfPeople.length; i++) {
             namesOfPeople += `${dobOfPeople[i].firstName.toString()} ${dobOfPeople[i].lastName.toString()}, `;
           }
-          alert(`People with this gender: ${namesOfPeople}`);
+          alert(`People with this date of birth: ${namesOfPeople}`);
           break;
         case 'height':
           let heightOfPeople = searchByHeight(people);
@@ -57,6 +57,11 @@ function app(people){
           break;
         case 'occupation':
           //Call the function to filter based on occupation
+          let occupationOfPeople = searchByOccupation(people);
+          for (let i = 0; i < occupationOfPeople.length; i++) {
+            namesOfPeople += `${occupationOfPeople[i].firstName.toString()} ${occupationOfPeople[i].lastName.toString()}, `;
+          }
+          alert(`People with this occupation: ${namesOfPeople}`);
           break;
       }
       break;
@@ -192,6 +197,21 @@ function searchByWeight(people){
  return weightOfPeople;
 }
 
+ 
+   
+function searchByOccupation(people) {
+  let filterOccupation = promptFor("What occupation do you want to search for?", autoValid);
+   let occupationOfPeople = people.filter(function(el){
+     if (el.occupation === filterOccupation) {
+       return true;
+     } else {
+       return false;
+     }
+
+
+  });
+  return occupationOfPeople;
+}
 
 //#endregion
 
