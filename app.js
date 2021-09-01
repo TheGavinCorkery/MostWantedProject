@@ -13,12 +13,19 @@ function app(people){
   switch(searchType){
     case 'yes':
       searchResults = searchByName(people);
+      mainMenu(searchResults, people);
       break;
     case 'no':
+      let namesOfPeople = '';
       let filter = promptFor('What do you want to look for? Enter gender, dob, height, weight, eyeColor, occupation', autoValid).toLowerCase();
       switch(filter){
         case 'gender':
-          //Call the function to filter based on gender
+          let genderOfPeople = searchByGender(people);
+          for (let i = 0; i < genderOfPeople.length; i++) {
+            namesOfPeople += `${genderOfPeople[i].firstName.toString()} ${genderOfPeople[i].lastName.toString()}, `;
+          }
+          alert(`People with this gender: ${namesOfPeople}`);
+
           break;
         case 'dob':
           //Call the function to filter based on date of birth
@@ -31,7 +38,7 @@ function app(people){
           break;
         case 'eyecolor':
           let peopleWithEyeColor = searchByEyeColor(people);
-          let namesOfPeople = '';
+          
           for (let i = 0; i < peopleWithEyeColor.length; i++) {
             namesOfPeople += `${peopleWithEyeColor[i].firstName.toString()} ${peopleWithEyeColor[i].lastName.toString()}, `;
           }
@@ -48,7 +55,7 @@ function app(people){
   }
   
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
-  mainMenu(searchResults, people);
+
 }
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
@@ -122,6 +129,19 @@ function searchByEyeColor(people){
 
 //TODO: add other trait filter functions here.
 
+function searchByGender(people){
+   let gender = promptFor("What gender do you want to look for? Male or female", autoValid);
+   let genderOfPeople = people.filter(function(el){
+     if (el.gender === gender) {
+       return true;
+     } else {
+       return false;
+     }
+
+  });
+  return genderOfPeople;
+} 
+   
 
 
 //#endregion
