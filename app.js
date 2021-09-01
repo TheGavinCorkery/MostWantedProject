@@ -28,6 +28,11 @@ function app(people){
           break;
         case 'dob':
           //Call the function to filter based on date of birth
+          let dobOfPeople = searchByDOB(people);
+          for (let i = 0; i < dobOfPeople.length; i++) {
+            namesOfPeople += `${dobOfPeople[i].firstName.toString()} ${dobOfPeople[i].lastName.toString()}, `;
+          }
+          alert(`People with this gender: ${namesOfPeople}`);
           break;
         case 'height':
           let heightOfPeople = searchByHeight(people);
@@ -131,6 +136,19 @@ function searchByEyeColor(people){
     }
   });
   return peopleWithEyeColor;
+}
+
+function searchByDOB(people) {
+  let filterDOB = promptFor("What date of birth do you want to search for?", autoValid);
+    let dobOfPeople = people.filter(function(element) {
+      if (element.dob === filterDOB){
+        return true;
+      }
+      else{
+        return false;
+      }
+    });
+    return dobOfPeople;
 }
 
 //TODO: add other trait filter functions here.
