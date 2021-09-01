@@ -94,7 +94,8 @@ function mainMenu(person, people){
     // TODO: get person's family
     break;
     case "descendants":
-    // TODO: get person's descendants
+      let childrenIds = findChildrenIds(person[0].id, people);
+      console.log(childrenIds);
     break;
     case "restart":
     app(people); // restart
@@ -240,6 +241,18 @@ function displayPerson(person){
   // TODO: finish getting the rest of the information to display.
   alert(personInfo);
 }
+
+function findChildrenIds (parentId, people) {
+  let arrayOfChildrenIds = people.filter(function(element) {
+    for (let x = 0; x < element.parents.length; x++) {
+      if (element.parents[x] == parentId){
+        return element.id;
+      }
+    }
+
+  });
+  return arrayOfChildrenIds;
+};
 
 //#endregion
 
