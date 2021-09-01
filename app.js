@@ -25,7 +25,6 @@ function app(people){
             namesOfPeople += `${genderOfPeople[i].firstName.toString()} ${genderOfPeople[i].lastName.toString()}, `;
           }
           alert(`People with this gender: ${namesOfPeople}`);
-
           break;
         case 'dob':
           //Call the function to filter based on date of birth
@@ -36,14 +35,21 @@ function app(people){
           alert(`People with this date of birth: ${namesOfPeople}`);
           break;
         case 'height':
-        //Call the function to filter based on height
+          let heightOfPeople = searchByHeight(people);
+          for (let i = 0; i < heightOfPeople.length; i++) {
+            namesOfPeople += `${heightOfPeople[i].firstName.toString()} ${heightOfPeople[i].lastName.toString()}, `;
+          }
+          alert(`People with this height: ${namesOfPeople}`);
           break;
         case 'weight':
-          //Call function to filter based on weight
+          let weightOfPeople = searchByWeight(people);
+          for (let i = 0; i < weightOfPeople.length; i++) {
+            namesOfPeople += `${weightOfPeople[i].firstName.toString()} ${weightOfPeople[i].lastName.toString()}, `;
+          }
+          alert(`People with this weight: ${namesOfPeople}`);
           break;
         case 'eyecolor':
           let peopleWithEyeColor = searchByEyeColor(people);
-          
           for (let i = 0; i < peopleWithEyeColor.length; i++) {
             namesOfPeople += `${peopleWithEyeColor[i].firstName.toString()} ${peopleWithEyeColor[i].lastName.toString()}, `;
           }
@@ -166,7 +172,35 @@ function searchByGender(people){
 
   });
   return genderOfPeople;
-} 
+}
+
+function searchByHeight(people){
+  let height = promptFor("What height do you want to look for?", autoValid);
+  let heightOfPeople = people.filter(function(el){
+    if (el.height === height) {
+      return true;
+    } else {
+      return false;
+    }
+
+ });
+ return heightOfPeople;
+}
+
+function searchByWeight(people){
+  let weight = promptFor("What weight do you want to look for?", autoValid);
+  let weightOfPeople = people.filter(function(el){
+    if (el.weight === weight) {
+      return true;
+    } else {
+      return false;
+    }
+
+ });
+ return weightOfPeople;
+}
+
+ 
    
 function searchByOccupation(people) {
   let filterOccupation = promptFor("What occupation do you want to search for?", autoValid);
@@ -176,6 +210,7 @@ function searchByOccupation(people) {
      } else {
        return false;
      }
+
 
   });
   return occupationOfPeople;
