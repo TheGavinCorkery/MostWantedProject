@@ -153,7 +153,7 @@ function searchByEyeColor(people, namesOfPeople){
 }
 
 function searchByDOB(people, namesOfPeople) {
-  let filterDOB = promptFor("What date of birth do you want to search for?", autoValid);
+  let filterDOB = promptFor("What date of birth do you want to search for?", dobValid);
   let peopleWithDOB;
   if (namesOfPeople.length > 0) {
     peopleWithDOB = namesOfPeople.filter(function(element) {
@@ -515,4 +515,12 @@ function eyeColorValid(input) {
     alert('Please enter a valid option.');
     return false;
   }
+}
+
+function dobValid(input) {
+  if (input.length > 10 || input.length < 9) {
+    alert('Please enter a valid date of birth.');
+    return false;
+  }
+  return true;
 }
