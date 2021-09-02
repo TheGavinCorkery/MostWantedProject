@@ -16,11 +16,10 @@ function app(people){
     case 'no':
       let filteredArray = searchByCriteria(people);
       displayFilterNames(filteredArray);
-      searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
-      searchResults = searchByName(people);
+      app(people);
       break;
-      default:
-    app(people); // restart app
+    default:
+      app(people); // restart app
       break;
   }
   
@@ -205,7 +204,7 @@ function searchByGender(people, namesOfPeople){
 }
 
 function searchByHeight(people, namesOfPeople){
-  let heightFilter = promptFor("What height do you want to look for?", autoValid);
+  let heightFilter = promptFor("What height do you want to look for?", heightValid);
   let heightOfPeople;
   if (namesOfPeople.length > 0) {
     heightOfPeople = namesOfPeople.filter(function(element) {
@@ -558,6 +557,20 @@ function dobValid(input) {
   if (input.length > 10 || input.length < 9) {
     alert('Please enter a valid date of birth.');
     return false;
+  }
+  return true;
+}
+
+function heightValid(input) {
+  if (input > 100 || input < 0) {
+    alert('Please enter a valid height.');
+    return false;
+  }
+  for (let i = 0; i < input.length; i++) {
+    if (input.charCodeAt(i) > 57 || input.charCodeAt(i) < 48) {
+      alert('Please enter a valid height.');
+      return false;
+    }
   }
   return true;
 }
