@@ -5,65 +5,20 @@
 //Used for the overall flow of the application.
 /////////////////////////////////////////////////////////////////
 //#region 
-
 // app is the function called to start the entire application
 function app(people){
   let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   let searchResults;
+  let namesOfPeople = '';
   switch(searchType){
     case 'yes':
       searchResults = searchByName(people);
       mainMenu(searchResults, people);
       break;
     case 'no':
-      let namesOfPeople = '';
-      let filter = promptFor('What do you want to look for? Enter gender, dob, height, weight, eyeColor, occupation', autoValid).toLowerCase();
-      switch(filter){
-        case 'gender':
-          let genderOfPeople = searchByGender(people);
-          for (let i = 0; i < genderOfPeople.length; i++) {
-            namesOfPeople += `${genderOfPeople[i].firstName.toString()} ${genderOfPeople[i].lastName.toString()}, `;
-          }
-          alert(`People with this gender: ${namesOfPeople}`);
-          break;
-        case 'dob':
-          //Call the function to filter based on date of birth
-          let dobOfPeople = searchByDOB(people);
-          for (let i = 0; i < dobOfPeople.length; i++) {
-            namesOfPeople += `${dobOfPeople[i].firstName.toString()} ${dobOfPeople[i].lastName.toString()}, `;
-          }
-          alert(`People with this date of birth: ${namesOfPeople}`);
-          break;
-        case 'height':
-          let heightOfPeople = searchByHeight(people);
-          for (let i = 0; i < heightOfPeople.length; i++) {
-            namesOfPeople += `${heightOfPeople[i].firstName.toString()} ${heightOfPeople[i].lastName.toString()}, `;
-          }
-          alert(`People with this height: ${namesOfPeople}`);
-          break;
-        case 'weight':
-          let weightOfPeople = searchByWeight(people);
-          for (let i = 0; i < weightOfPeople.length; i++) {
-            namesOfPeople += `${weightOfPeople[i].firstName.toString()} ${weightOfPeople[i].lastName.toString()}, `;
-          }
-          alert(`People with this weight: ${namesOfPeople}`);
-          break;
-        case 'eyecolor':
-          let peopleWithEyeColor = searchByEyeColor(people);
-          for (let i = 0; i < peopleWithEyeColor.length; i++) {
-            namesOfPeople += `${peopleWithEyeColor[i].firstName.toString()} ${peopleWithEyeColor[i].lastName.toString()}, `;
-          }
-          alert(`People with this color eyes: ${namesOfPeople}`);
-          break;
-        case 'occupation':
-          //Call the function to filter based on occupation
-          let occupationOfPeople = searchByOccupation(people);
-          for (let i = 0; i < occupationOfPeople.length; i++) {
-            namesOfPeople += `${occupationOfPeople[i].firstName.toString()} ${occupationOfPeople[i].lastName.toString()}, `;
-          }
-          alert(`People with this occupation: ${namesOfPeople}`);
-          break;
-      }
+      let filteredArray = searchByCriteria(people, namesOfPeople);
+      console.log(filteredArray);
+      alert(`People fitting these criteria: ${filteredArray}`)
       break;
       default:
     app(people); // restart app
@@ -138,7 +93,56 @@ function searchByName(people){
   return foundPerson;
 }
 
- 
+function searchByCriteria(people, namesOfPeople) {
+  let filter = promptFor('What do you want to look for? Enter gender, dob, height, weight, eyeColor, occupation. If no other criteria, enter done', autoValid).toLowerCase();
+  switch(filter){
+    case 'gender':
+      let genderOfPeople = searchByGender(people, namesOfPeople);
+      for (let i = 0; i < genderOfPeople.length; i++) {
+        namesOfPeople += `${genderOfPeople[i].firstName.toString()} ${genderOfPeople[i].lastName.toString()}, `;
+      }
+      searchByCriteria(people, namesOfPeople)
+      break;
+    case 'dob':
+      //Call the function to filter based on date of birth
+      let dobOfPeople = searchByDOB(people, namesOfPeople);
+      for (let i = 0; i < dobOfPeople.length; i++) {
+        namesOfPeople += `${dobOfPeople[i].firstName.toString()} ${dobOfPeople[i].lastName.toString()}, `;
+      }
+      searchByCriteria(people, namesOfPeople)
+      break;
+    case 'height':
+      let heightOfPeople = searchByHeight(people, namesOfPeople);
+      for (let i = 0; i < heightOfPeople.length; i++) {
+        namesOfPeople += `${heightOfPeople[i].firstName.toString()} ${heightOfPeople[i].lastName.toString()}, `;
+      }
+      searchByCriteria(people, namesOfPeople)
+      break;
+    case 'weight':
+      let weightOfPeople = searchByWeight(people, namesOfPeople);
+      for (let i = 0; i < weightOfPeople.length; i++) {
+        namesOfPeople += `${weightOfPeople[i].firstName.toString()} ${weightOfPeople[i].lastName.toString()}, `;
+      }
+      searchByCriteria(people, namesOfPeople)
+      break;
+    case 'eyecolor':
+      let peopleWithEyeColor = searchByEyeColor(people, namesOfPeople);
+      for (let i = 0; i < peopleWithEyeColor.length; i++) {
+        namesOfPeople += `${peopleWithEyeColor[i].firstName.toString()} ${peopleWithEyeColor[i].lastName.toString()}, `;
+      }
+      searchByCriteria(people, namesOfPeople)
+      break;
+    case 'occupation':
+      //Call the function to filter based on occupation
+      let occupationOfPeople = searchByOccupation(people, namesOfPeople);
+      for (let i = 0; i < occupationOfPeople.length; i++) {
+        namesOfPeople += `${occupationOfPeople[i].firstName.toString()} ${occupationOfPeople[i].lastName.toString()}, `;
+      }
+      searchByCriteria(people, namesOfPeople);
+      break;
+  }
+  return namesOfPeople;
+}
 
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
