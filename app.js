@@ -351,10 +351,12 @@ function findSpouse (person, people) {
 function findSiblings (person, people) {
   let siblings = people.filter(function(element) {
     for (let i =0; i < element.parents.length; i++){
-      if (element.parents == person.parents){
-        return true;
-      } else {
-        return false;
+      for (let j =0; j < person.parents.length; j++){
+        if (element.parents[i] == person.parents[j] && element.id != person.id){
+          return true;
+        } else {
+          return false;
+        }
       }
     }
   });
