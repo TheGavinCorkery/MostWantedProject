@@ -92,7 +92,7 @@ function searchByCriteria(people) {
   let numOfFilters = promptFor('How many filters do you want to use?', autoValid);
   let namesOfPeople = [];
   for (let x = 0; x < numOfFilters; x++) {
-    let filter = promptFor('What do you want to look for? Enter gender, dob, height, weight, eyeColor, occupation. If no other criteria, enter done', autoValid).toLowerCase();
+    let filter = promptFor('What do you want to look for? Enter gender, dob, height, weight, eyeColor, occupation. If no other criteria, enter done', filterOptionValid).toLowerCase();
     switch(filter){
       case 'gender':
         namesOfPeople = searchByGender(people, namesOfPeople);
@@ -495,6 +495,15 @@ function displayValid(input) {
   if (input === 'info' || input === 'descendants' || input === 'family' || input === 'restart' || input === 'quit') {
     return true;
   }else{
+    alert('Please enter a valid option.');
+    return false;
+  }
+}
+
+function filterOptionValid(input) {
+  if (input === 'gender' || input === 'dob' || input === 'height' || input === 'weight' || input === 'eyecolor' || input === 'occupation') {
+    return true;
+  }else {
     alert('Please enter a valid option.');
     return false;
   }
