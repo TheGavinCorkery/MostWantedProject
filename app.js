@@ -89,7 +89,7 @@ function mainMenu(person, people){
     case "info":
     // TODO: get person's info
     
-    break;
+      break;
     case "family":
       let children = findChildren(person[0], people);
       console.log(children);
@@ -97,19 +97,19 @@ function mainMenu(person, people){
       console.log(spouse);
       let parents = findParents(person[0], people);
       console.log(parents);
-    break;
+      break;
     case "descendants":
 
       let descendants = findDescendants(person[0].id, people);
-      console.log(descendants);
-    break;
+      printDescendants(descendants);
+      break;
     case "restart":
-    app(people); // restart
-    break;
+      app(people); // restart
+      break;
     case "quit":
-    return; // stop execution
+      return; // stop execution
     default:
-    return mainMenu(person, people); // ask again
+      return mainMenu(person, people); // ask again
   }
 }
 
@@ -271,6 +271,18 @@ function findDescendants (parentId, people) {
     arrayOfDescendants.push(grandkids[x]);
   }
   return arrayOfDescendants;
+}
+
+function printDescendants(descendants) {
+  let descendantsNames = '';
+  for (let i = 0; i < descendants.length; i++) {
+    if (i < descendants.length - 1){
+      descendantsNames += `${descendants[i].firstName} ${descendants[i].lastName}, `;
+    }else {
+      descendantsNames += `${descendants[i].firstName} ${descendants[i].lastName}`;
+    }
+  }
+  alert(descendantsNames);
 }
 
 function findChildren (person, people) {
