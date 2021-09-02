@@ -360,23 +360,36 @@ function printDescendants(descendants) {
 
 function printFamily(parents, spouse, siblings) {
   let parentsNames = '';
-  let spouseName = `${spouse[0].firstName} ${spouse[0].lastName}`;
+  let spouseName = '';
   let siblingsNames = '';
-  for (let i = 0; i < parents.length; i++) {
-    if (i < parents.length - 1){
-      parentsNames += `${parents[i].firstName} ${parents[i].lastName}, `;
-    }else {
-      parentsNames += `${parents[i].firstName} ${parents[i].lastName}`;
+  if (parents.length == 0) {
+    parentsNames = 'None';
+  } else {
+    for (let i = 0; i < parents.length; i++) {
+      if (i < parents.length - 1){
+        parentsNames += `${parents[i].firstName} ${parents[i].lastName}, `;
+      }else {
+        parentsNames += `${parents[i].firstName} ${parents[i].lastName}`;
+      }
     }
   }
-  for (let i = 0; i < siblings.length; i++) {
-    if (i < siblings.length - 1){
-      siblingsNames += `${siblings[i].firstName} ${siblings[i].lastName}, `;
-    }else {
-      siblingsNames += `${siblings[i].firstName} ${siblings[i].lastName}`;
+  if (spouse.length == 0) {
+    spouseName = 'None';
+  } else {
+    spouseName = `${spouse[0].firstName} ${spouse[0].lastName}`
+  }
+  if (siblings.length == 0) {
+    siblingsNames = 'None';
+  } else {
+    for (let i = 0; i < siblings.length; i++) {
+      if (i < siblings.length - 1){
+        siblingsNames += `${siblings[i].firstName} ${siblings[i].lastName}, `;
+      }else {
+        siblingsNames += `${siblings[i].firstName} ${siblings[i].lastName}`;
+      }
     }
   }
-  alert('Parents: ' + parentsNames + '  Spouse: ' + spouseName + '  Siblings: ' + siblingsNames);
+  alert('Parents: ' + parentsNames + '   Spouse: ' + spouseName + '   Siblings: ' + siblingsNames);
 }
 
 function findChildren (person, people) {
@@ -468,9 +481,6 @@ function autoValid(input){
 
 //Unfinished validation function you can use for any of your custom validation callbacks.
 //can be used for things like eye color validation for example.
-function customValidation(input){
-  
-}
 function firstNameValidation(input){
   let numbers = "0123456789`~!@#$%^&*()-_=+[{]}|;:',<.>/?";
   if (input.length < 1 || input.length > 50) {
@@ -483,15 +493,6 @@ function firstNameValidation(input){
       }
     }
   }
-  // let nameCheck = false;
-  // for (let i = 0; i < people.length; i++) {
-  //   if (input.toLowerCase() == people[i].firstName.toLowerCase()) {
-  //     nameCheck = true;
-  //   }
-  // }
-  // if (nameCheck == false) {
-  //   return false;
-  // }
   return true;
 }
 function lastNameValidation(input){
