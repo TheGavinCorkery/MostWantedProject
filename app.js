@@ -97,6 +97,8 @@ function mainMenu(person, people){
       console.log(spouse);
       let parents = findParents(person[0], people);
       console.log(parents);
+      let siblings = findSiblings(person[0], people);
+      console.log(siblings);
     break;
     case "descendants":
 
@@ -308,6 +310,16 @@ function findSpouse (person, people) {
   return spouse;
 };
 
+function findSiblings (person, people) {
+  let siblings = people.filter(function(element) {
+      if (element.parents == person.parents){
+        return true;
+      } else {
+        return false;
+      }
+  });
+  return siblings;
+};
 //#endregion
 
 
