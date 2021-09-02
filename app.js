@@ -243,6 +243,7 @@ function displayPerson(person){
   alert(personInfo);
 }
 
+
 function findChildrenIds (parentId, people) {
   let arrayOfChildrenIds = people.filter(function(element) {
     for (let x = 0; x < element.parents.length; x++) {
@@ -254,13 +255,15 @@ function findChildrenIds (parentId, people) {
 
   let grandkids = people.filter(function(element) {
     for (let i = 0; i < arrayOfChildrenIds.length; i++) {
-      if (element.parents[i] == arrayOfChildrenIds[i].id){
-        return element.id;
-      }
+      for (let x = 0; x < arrayOfChildrenIds.length; x++) {
+        if (element.parents[i] == arrayOfChildrenIds[x].id){
+          return element.id;
+        }
+    }
     }
   })
   for (let x = 0; x < grandkids.length; x++) {
-    arrayOfChildrenIds.pop(grandkids[x]);
+    arrayOfChildrenIds.push(grandkids[x]);
   }
   return arrayOfChildrenIds;
 }
