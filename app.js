@@ -93,6 +93,10 @@ function mainMenu(person, people){
     case "family":
       let children = findChildren(person[0].id, people);
       console.log(children);
+      let spouse = findSpouse(person[0], people);
+      console.log(spouse);
+      let parents = findParents(person[0]);
+      console.log(parents);
     break;
     case "descendants":
 
@@ -288,11 +292,17 @@ function findParents (person) {
   return arrayOfParents;
 };
 
-function findSpouse (person) {
-  let spouseArray = [];
-  spouseArray = person.currentSpouse;
-  return spouseArray;
+function findSpouse (person, people) {
+  let spouse = people.filter(function(element) {
+      if (element.id == person.currentSpouse){
+        return true;
+      } else {
+        return false;
+      }
+  });
+  return spouse;
 };
+
 //#endregion
 
 
