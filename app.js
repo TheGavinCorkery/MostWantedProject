@@ -95,7 +95,7 @@ function mainMenu(person, people){
       console.log(children);
       let spouse = findSpouse(person[0], people);
       console.log(spouse);
-      let parents = findParents(person[0]);
+      let parents = findParents(person[0], people);
       console.log(parents);
     break;
     case "descendants":
@@ -278,18 +278,23 @@ function findChildren (parentId, people) {
     for (let x = 0; x < element.parents.length; x++) {
       if (element.parents[x] == parentId){
         return true;
+      } else {
+        return false;
       }
     }
   });
   return arrayOfChildren;
 };
 
-function findParents (person) {
-  let arrayOfParents = [];
-  for (let i = 0; i < person.parents.length; i++) {
-    arrayOfParents += person.parents[i];
-  }
-  return arrayOfParents;
+function findParents (person, people) {
+  let parents = people.filter(function(element) {
+      if (element.id == person.parents){
+        return true;
+      } else {
+        return false;
+      }
+  });
+  return parents;
 };
 
 function findSpouse (person, people) {
