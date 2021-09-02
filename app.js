@@ -338,6 +338,7 @@ function findDescendants (parentId, people) {
   for (let x = 0; x < grandkids.length; x++) {
     arrayOfDescendants.push(grandkids[x]);
   }
+
   return arrayOfDescendants;
 }
 
@@ -350,7 +351,11 @@ function printDescendants(descendants) {
       descendantsNames += `${descendants[i].firstName} ${descendants[i].lastName}`;
     }
   }
-  alert(descendantsNames);
+  if (descendants.length == 0) {
+    alert('This person has no descendants');
+  }else {
+    alert(descendantsNames);
+  }
 }
 
 function printFamily(parents, spouse, siblings) {
