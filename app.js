@@ -71,7 +71,7 @@ function mainMenu(person, people){
 
 //nearly finished function used to search through an array of people to find matching first and last name and return a SINGLE person object.
 function searchByName(people){
-  let firstName = promptFor("What is the person's first name?", autoValid);
+  let firstName = promptFor("What is the person's first name?", firstNameValidation(firstName, people));
   let lastName = promptFor("What is the person's last name?", autoValid);
 
   let foundPerson = people.filter(function(potentialMatch){
@@ -467,5 +467,27 @@ function autoValid(input){
 function customValidation(input){
   
 }
-
+function firstNameValidation(people){
+  // let numbers = "0123456789"
+  // if (input.length < 1 || input.length > 50) {
+  //   return false;
+  // }
+  // for (let i = 0; i < input.length; i++) {
+  //   for (let j = 0; j < input.length; j++) {
+  //     if(input[i] == numbers[j]) {
+  //       return false;
+  //     }
+  //   }
+  // }
+  let nameCheck = false;
+  for (let i = 0; i < people.length; i++) {
+    if (input.toLowerCase() = people[i].name.toLowerCase()) {
+      nameCheck = true;
+    }
+  }
+  if (nameCheck == false) {
+    return false;
+  }
+  return true;
+}
 //#endregion
