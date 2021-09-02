@@ -92,7 +92,7 @@ function searchByCriteria(people) {
   let numOfFilters = promptFor('How many filters do you want to use?', filterValidation);
   let namesOfPeople = [];
   for (let x = 0; x < numOfFilters; x++) {
-    let filter = promptFor('What do you want to look for? Enter gender, dob, height, weight, eyeColor, occupation. If no other criteria, enter done', autoValid).toLowerCase();
+    let filter = promptFor('What do you want to look for? Enter gender, dob, height, weight, eyeColor, occupation. If no other criteria, enter done', filterOptionValid).toLowerCase();
     switch(filter){
       case 'gender':
         namesOfPeople = searchByGender(people, namesOfPeople);
@@ -128,10 +128,10 @@ function searchByCriteria(people) {
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
 function searchByEyeColor(people, namesOfPeople){
-  let eyeColor = promptFor("What color eyes do you want to look for? Enter 'black', 'brown', 'hazel', 'blue', 'green", autoValid);
+  let eyeColor = promptFor("What color eyes do you want to look for? Enter 'black', 'brown', 'hazel', 'blue', 'green", eyeColorValid);
   let peopleWithEyeColor;
   if (namesOfPeople.length > 0) {
-    namesOfPeople = namesOfPeople.filter(function(element) {
+    peopleWithEyeColor = namesOfPeople.filter(function(element) {
       if (element.eyeColor == eyeColor){
         return true;
       }
@@ -149,7 +149,7 @@ function searchByEyeColor(people, namesOfPeople){
       }
     });
   }
-  return namesOfPeople;
+  return peopleWithEyeColor;
 }
 
 function searchByDOB(people, namesOfPeople) {
@@ -517,6 +517,23 @@ function displayValid(input) {
   if (input === 'info' || input === 'descendants' || input === 'family' || input === 'restart' || input === 'quit') {
     return true;
   }else{
+    alert('Please enter a valid option.');
+    return false;
+  }
+}
+
+function filterOptionValid(input) {
+  if (input === 'gender' || input === 'dob' || input === 'height' || input === 'weight' || input === 'eyecolor' || input === 'occupation') {
+    return true;
+  }else {
+    alert('Please enter a valid option.');
+    return false;
+  }
+}
+function eyeColorValid(input) {
+  if (input === 'black' || input === 'brown' || input === 'hazel' || input === 'blue' || input === 'green') {
+    return true;
+  }else {
     alert('Please enter a valid option.');
     return false;
   }
