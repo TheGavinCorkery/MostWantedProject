@@ -88,11 +88,11 @@ function searchByName(people){
 
 function searchByCriteria(people) {
   let numOfFilters = promptFor('How many items do you want to filter by?', autoValid);
-  
+  let filters = [];
   for (let x = 0; x < numOfFilters; x++) {
-    let filter = promptFor('What do you want to filter by? Enter gender, dob, height, weight, eyeColor, occupation.', autoValid).toLowerCase();
-    
-    switch(filter){
+    let currentFilter = promptFor('What do you want to filter by? Enter gender, dob, height, weight, eyeColor, occupation.', autoValid).toLowerCase();
+    filters += currentFilter;
+    switch(currentFilter){
       case 'gender':
         let filteredGender = searchByGender(people);
         break;
