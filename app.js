@@ -88,8 +88,8 @@ function mainMenu(person, people){
   switch(displayOption){
     case "info":
     // TODO: get person's info
-    
-    break;
+      displayPerson(person[0]);
+      break;
     case "family":
       let children = findChildren(person[0], people);
       console.log(children);
@@ -101,17 +101,16 @@ function mainMenu(person, people){
       console.log(siblings);
     break;
     case "descendants":
-
       let descendants = findDescendants(person[0].id, people);
-      console.log(descendants);
-    break;
+      printDescendants(descendants);
+      break;
     case "restart":
-    app(people); // restart
-    break;
+      app(people); // restart
+      break;
     case "quit":
-    return; // stop execution
+      return; // stop execution
     default:
-    return mainMenu(person, people); // ask again
+      return mainMenu(person, people); // ask again
   }
 }
 
@@ -246,7 +245,12 @@ function displayPerson(person){
   // height, weight, age, name, occupation, eye color.
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
-  // TODO: finish getting the rest of the information to display.
+  personInfo += "Gender: " + person.gender + "\n";
+  personInfo += "Date of Birth: " + person.dob + "\n";
+  personInfo += "Height: " + person.height + "\n";
+  personInfo += "Weight: " + person.weight + "\n";
+  personInfo += "Eye Color: " + person.eyeColor + "\n";
+  personInfo += "Occupation: " + person.occupation + "\n";
   alert(personInfo);
 }
 
@@ -273,6 +277,18 @@ function findDescendants (parentId, people) {
     arrayOfDescendants.push(grandkids[x]);
   }
   return arrayOfDescendants;
+}
+
+function printDescendants(descendants) {
+  let descendantsNames = '';
+  for (let i = 0; i < descendants.length; i++) {
+    if (i < descendants.length - 1){
+      descendantsNames += `${descendants[i].firstName} ${descendants[i].lastName}, `;
+    }else {
+      descendantsNames += `${descendants[i].firstName} ${descendants[i].lastName}`;
+    }
+  }
+  alert(descendantsNames);
 }
 
 function findChildren (person, people) {
