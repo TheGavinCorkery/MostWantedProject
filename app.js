@@ -37,7 +37,7 @@ function mainMenu(person, people){
     return app(people); // restart
   }
 
-  let displayOption = promptFor("Found " + person[0].firstName + " " + person[0].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid);
+  let displayOption = promptFor("Found " + person[0].firstName + " " + person[0].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", displayValid);
 
   switch(displayOption){
     case "info":
@@ -495,6 +495,7 @@ function displayValid(input) {
   if (input === 'info' || input === 'descendants' || input === 'family' || input === 'restart' || input === 'quit') {
     return true;
   }else{
+    alert('Please enter a valid option.');
     return false;
   }
 }
