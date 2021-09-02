@@ -75,7 +75,7 @@ function mainMenu(person, people){
 function searchByName(people){
 
   let firstName = promptFor("What is the person's first name?", firstNameValidation);
-  let lastName = promptFor("What is the person's last name?", autoValid);
+  let lastName = promptFor("What is the person's last name?", lastNameValidation);
 
   let foundPerson = people.filter(function(potentialMatch){
     if(potentialMatch.firstName === firstName && potentialMatch.lastName === lastName){
@@ -89,7 +89,7 @@ function searchByName(people){
   return foundPerson;
 }
 function searchByCriteria(people) {
-  let numOfFilters = promptFor('How many filters do you want to use?', autoValid);
+  let numOfFilters = promptFor('How many filters do you want to use?', filterValidation);
   let namesOfPeople = [];
   for (let x = 0; x < numOfFilters; x++) {
     let filter = promptFor('What do you want to look for? Enter gender, dob, height, weight, eyeColor, occupation. If no other criteria, enter done', filterOptionValid).toLowerCase();
@@ -180,7 +180,7 @@ function searchByDOB(people, namesOfPeople) {
 //TODO: add other trait filter functions here.
 
 function searchByGender(people, namesOfPeople){
-   let gender = promptFor("What gender do you want to look for? Male or female", autoValid);
+   let gender = promptFor("What gender do you want to look for? Male or female", genderValidation);
    let genderOfPeople;
   if (namesOfPeople.length > 0) {
     genderOfPeople = namesOfPeople.filter(function(element) {
@@ -230,7 +230,7 @@ function searchByHeight(people, namesOfPeople){
 }
 
 function searchByWeight(people, namesOfPeople){
-  let weightFilter = promptFor("What weight do you want to look for?", autoValid);
+  let weightFilter = promptFor("What weight do you want to look for?", weightValidation);
   let weightOfPeople;
   if (namesOfPeople.length > 0) {
     weightOfPeople = namesOfPeople.filter(function(element) {
@@ -468,7 +468,7 @@ function customValidation(input){
   
 }
 function firstNameValidation(input){
-  let numbers = "0123456789";
+  let numbers = "0123456789`~!@#$%^&*()-_=+[{]}|;:',<.>/?";
   if (input.length < 1 || input.length > 50) {
     return false;
   }
@@ -490,7 +490,44 @@ function firstNameValidation(input){
   // }
   return true;
 }
-
+function lastNameValidation(input){
+  let numbers = "0123456789`~!@#$%^&*()-_=+[{]}|;:',<.>/?";
+  if (input.length < 1 || input.length > 50) {
+    return false;
+  }
+  for (let i = 0; i < input.length; i++) {
+    for (let j = 0; j < numbers.length; j++) {
+      if(input[i] == numbers[j]) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+function filterValidation(input) {
+  if (input >= 1 && input <= 5 && Number.isInteger(parseInt(input, 10)) === true) {
+    return true;
+  }else{
+    alert('Please enter 1-5.');
+    return false;
+  }
+}
+function genderValidation(input) {
+  if (input.toLowerCase() === 'male' || input.toLowerCase() === 'female') {
+    return true;
+  }else{
+    alert('Please enter male or female.');
+    return false;
+  }
+}
+function weightValidation(input) {
+  if (input >= 100 && input <= 256 && Number.isInteger(parseInt(input, 10)) === true) {
+    return true;
+  }else{
+    alert('Please enter a valid weight.');
+    return false;
+  }
+}
 function displayValid(input) {
   if (input === 'info' || input === 'descendants' || input === 'family' || input === 'restart' || input === 'quit') {
     return true;
