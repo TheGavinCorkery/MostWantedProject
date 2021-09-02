@@ -9,12 +9,15 @@
 function app(people){
   let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   let searchResults;
+
   switch(searchType){
     case 'yes':
       searchResults = searchByName(people);
+      mainMenu(searchResults, people);
       break;
     case 'no':
-      let filteredArray = searchByCriteria(people);
+      let filteredList = [];
+      let filteredArray = searchByCriteria(people, filteredList);
       displayFilterNames(filteredArray);
       break;
       default:
@@ -87,135 +90,198 @@ function searchByName(people){
 }
 
 function searchByCriteria(people) {
-  let numOfFilters = promptFor('How many items do you want to filter by?', autoValid);
-  let filters = [];
+  let numOfFilters = promptFor('How many filters do you want to use?', autoValid);
+  let namesOfPeople = [];
   for (let x = 0; x < numOfFilters; x++) {
-    let currentFilter = promptFor('What do you want to filter by? Enter gender, dob, height, weight, eyeColor, occupation.', autoValid).toLowerCase();
-    filters += currentFilter;
-    switch(currentFilter){
+    let filter = promptFor('What do you want to look for? Enter gender, dob, height, weight, eyeColor, occupation. If no other criteria, enter done', autoValid).toLowerCase();
+    switch(filter){
       case 'gender':
-        let filteredGender = searchByGender(people);
+        namesOfPeople = searchByGender(people, namesOfPeople);
         break;
       case 'dob':
         //Call the function to filter based on date of birth
-        let filteredDOB = searchByDOB(people);
+        namesOfPeople = searchByDOB(people, namesOfPeople);
         break;
       case 'height':
-        let filteredHeight = searchByHeight(people);
+        namesOfPeople = searchByHeight(people, namesOfPeople);
         break;
       case 'weight':
-        let filteredWeight = searchByWeight(people);
+        namesOfPeople = searchByWeight(people, namesOfPeople);
+
         break;
       case 'eyecolor':
-        let filteredEyeColor = searchByEyeColor(people);
+        namesOfPeople = searchByEyeColor(people, namesOfPeople);
+        
         break;
       case 'occupation':
         //Call the function to filter based on occupation
-        let filteredOccupation = searchByOccupation(people);
+        namesOfPeople = searchByOccupation(people, namesOfPeople);
+        
+        break;
+      case 'done':
         break;
     }
   }
-
   
-
-  return peopleFittingFilter;
+  return namesOfPeople;
 }
 
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
-function searchByEyeColor(people){
+function searchByEyeColor(people, namesOfPeople){
   let eyeColor = promptFor("What color eyes do you want to look for? Enter 'black', 'brown', 'hazel', 'blue', 'green", autoValid);
-  let peopleWithEyeColor = [];
-  peopleWithEyeColor = people.filter(function(element) {
-      if (element.eyeColor === eyeColor){
+  let peopleWithEyeColor;
+  if (namesOfPeople.length > 0) {
+    namesOfPeople = namesOfPeople.filter(function(element) {
+      if (element.eyeColor == eyeColor){
         return true;
       }
       else{
         return false;
       }
     });
-  
-  return peopleWithEyeColor;
+  }else {
+    peopleWithEyeColor = people.filter(function(element) {
+      if (element.eyeColor == eyeColor){
+        return true;
+      }
+      else{
+        return false;
+      }
+    });
+  }
+  return namesOfPeople;
 }
 
-function searchByDOB(people) {
+function searchByDOB(people, namesOfPeople) {
   let filterDOB = promptFor("What date of birth do you want to search for?", autoValid);
-  let peopleWithDOB = [];
-  peopleWithDOB = people.filter(function(element) {
-    if (element.dob === filterDOB){
-      return true;
-    }
-    else{
-      return false;
-    }
-  });
-
-  return peopleWithDOB;
+  let peopleWithDOB;
+  if (namesOfPeople.length > 0) {
+    peopleWithDOB = namesOfPeople.filter(function(element) {
+      if (element.dob == filterDOB){
+        return true;
+      }
+      else{
+        return false;
+      }
+    });
+  }else {
+    peopleWithDOB = people.filter(function(element) {
+      if (element.dob == filterDOB){
+        return true;
+      }
+      else{
+        return false;
+      }
+    });
+  }
+    return peopleWithDOB;
 }
 
 //TODO: add other trait filter functions here.
 
-function searchByGender(people){
+function searchByGender(people, namesOfPeople){
    let gender = promptFor("What gender do you want to look for? Male or female", autoValid);
-   let genderOfPeople = [];
-
+   let genderOfPeople;
+  if (namesOfPeople.length > 0) {
+    genderOfPeople = namesOfPeople.filter(function(element) {
+      if (element.gender == gender){
+        return true;
+      }
+      else{
+        namesOfPeople.splice(element, 1);
+        return false;
+      }
+    });
+  }else {
     genderOfPeople = people.filter(function(element) {
-      if (element.gender === gender){
+      if (element.gender == gender){
         return true;
       }
       else{
         return false;
       }
     });
-
+  }
   return genderOfPeople;
 }
 
-function searchByHeight(people){
+function searchByHeight(people, namesOfPeople){
   let heightFilter = promptFor("What height do you want to look for?", autoValid);
-  let heightOfPeople = [];
+  let heightOfPeople;
+  if (namesOfPeople.length > 0) {
+    heightOfPeople = namesOfPeople.filter(function(element) {
+      if (element.height == heightFilter){
+        return true;
+      }
+      else{
+        namesOfPeople.splice(element, 1);
+        return false;
+      }
+    });
+  }else {
     heightOfPeople = people.filter(function(element) {
-      if (element.height === heightFilter){
+      if (element.height == heightFilter){
         return true;
       }
       else{
         return false;
       }
     });
-
+  }
  return heightOfPeople;
 }
 
-function searchByWeight(people){
+function searchByWeight(people, namesOfPeople){
   let weightFilter = promptFor("What weight do you want to look for?", autoValid);
-  let weightOfPeople = [];
+  let weightOfPeople;
+  if (namesOfPeople.length > 0) {
+    weightOfPeople = namesOfPeople.filter(function(element) {
+      if (element.weight == weightFilter){
+        return true;
+      }
+      else{
+        namesOfPeople.splice(element, 1);
+        return false;
+      }
+    });
+  }else {
     weightOfPeople = people.filter(function(element) {
-      if (element.weight === weightFilter){
+      if (element.weight == weightFilter){
         return true;
       }
       else{
         return false;
       }
     });
-
+  }
  return weightOfPeople;
 }
 
  
    
-function searchByOccupation(people) {
+function searchByOccupation(people, namesOfPeople) {
   let filterOccupation = promptFor("What occupation do you want to search for?", autoValid);
-  let peopleOfOccupation = [];
-  
-    peopleOfOccupation = people.filter(function(element) {
-      if (element.occupation === filterOccupation){
+  let peopleOfOccupation;
+  if (namesOfPeople.length > 0) {
+    peopleOfOccupation = namesOfPeople.filter(function(element) {
+      if (element.occupation == filterOccupation){
         return true;
       }
       else{
         return false;
       }
     });
-  
+  }else {
+    peopleOfOccupation = people.filter(function(element) {
+      if (element.occupation == filterOccupation){
+        return true;
+      }
+      else{
+        return false;
+      }
+    });
+  }
   return peopleOfOccupation;
 }
 
@@ -351,12 +417,10 @@ function findSpouse (person, people) {
 function findSiblings (person, people) {
   let siblings = people.filter(function(element) {
     for (let i =0; i < element.parents.length; i++){
-      for (let j =0; j < person.parents.length; j++){
-        if (element.parents[i] == person.parents[j] && element.id != person.id){
-          return true;
-        } else {
-          return false;
-        }
+      if (element.parents == person.parents){
+        return true;
+      } else {
+        return false;
       }
     }
   });
