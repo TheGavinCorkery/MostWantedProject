@@ -180,7 +180,7 @@ function searchByDOB(people, namesOfPeople) {
 //TODO: add other trait filter functions here.
 
 function searchByGender(people, namesOfPeople){
-   let gender = promptFor("What gender do you want to look for? Male or female", autoValid);
+   let gender = promptFor("What gender do you want to look for? Male or female", genderValidation);
    let genderOfPeople;
   if (namesOfPeople.length > 0) {
     genderOfPeople = namesOfPeople.filter(function(element) {
@@ -230,7 +230,7 @@ function searchByHeight(people, namesOfPeople){
 }
 
 function searchByWeight(people, namesOfPeople){
-  let weightFilter = promptFor("What weight do you want to look for?", autoValid);
+  let weightFilter = promptFor("What weight do you want to look for?", weightValidation);
   let weightOfPeople;
   if (namesOfPeople.length > 0) {
     weightOfPeople = namesOfPeople.filter(function(element) {
@@ -512,7 +512,22 @@ function filterValidation(input) {
     return false;
   }
 }
-
+function genderValidation(input) {
+  if (input.toLowerCase() === 'male' || input.toLowerCase() === 'female') {
+    return true;
+  }else{
+    alert('Please enter male or female.');
+    return false;
+  }
+}
+function weightValidation(input) {
+  if (input >= 100 && input <= 256 && Number.isInteger(parseInt(input, 10)) === true) {
+    return true;
+  }else{
+    alert('Please enter a valid weight.');
+    return false;
+  }
+}
 function displayValid(input) {
   if (input === 'info' || input === 'descendants' || input === 'family' || input === 'restart' || input === 'quit') {
     return true;
