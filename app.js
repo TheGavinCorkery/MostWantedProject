@@ -91,12 +91,13 @@ function mainMenu(person, people){
     
     break;
     case "family":
-    // TODO: get person's family
+      let children = findChildren(person[0].id, people);
+      console.log(children);
     break;
     case "descendants":
 
-      let childrenIds = findChildrenIds(person[0].id, people);
-      console.log(childrenIds);
+      let descendants = findDescendants(person[0].id, people);
+      console.log(descendants);
     break;
     case "restart":
     app(people); // restart
@@ -244,8 +245,8 @@ function displayPerson(person){
 }
 
 
-function findChildrenIds (parentId, people) {
-  let arrayOfChildrenIds = people.filter(function(element) {
+function findDescendants (parentId, people) {
+  let arrayOfDescendants = people.filter(function(element) {
     for (let x = 0; x < element.parents.length; x++) {
       if (element.parents[x] == parentId){
         return element.id;
@@ -254,19 +255,44 @@ function findChildrenIds (parentId, people) {
   })
 
   let grandkids = people.filter(function(element) {
-    for (let i = 0; i < arrayOfChildrenIds.length; i++) {
-      for (let x = 0; x < arrayOfChildrenIds.length; x++) {
-        if (element.parents[i] == arrayOfChildrenIds[x].id){
+    for (let i = 0; i < arrayOfDescendants.length; i++) {
+      for (let x = 0; x < arrayOfDescendants.length; x++) {
+        if (element.parents[i] == arrayOfDescendants[x].id){
           return element.id;
         }
     }
     }
   })
   for (let x = 0; x < grandkids.length; x++) {
-    arrayOfChildrenIds.push(grandkids[x]);
+    arrayOfDescendants.push(grandkids[x]);
   }
-  return arrayOfChildrenIds;
+  return arrayOfDescendants;
 }
+
+function findChildren (parentId, people) {
+  let arrayOfChildren = people.filter(function(element) {
+    for (let x = 0; x < element.parents.length; x++) {
+      if (element.parents[x] == parentId){
+        return true;
+      }
+    }
+  });
+  return arrayOfChildren;
+};
+
+function findParents (person) {
+  let arrayOfParents = [];
+  for (let i = 0; i < person.parents.length; i++) {
+    arrayOfParents += person.parents[i];
+  }
+  return arrayOfParents;
+};
+
+function findSpouse (person) {
+  let spouseArray = [];
+  spouseArray = person.currentSpouse;
+  return spouseArray;
+};
 //#endregion
 
 
