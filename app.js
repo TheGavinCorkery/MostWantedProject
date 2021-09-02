@@ -88,7 +88,7 @@ function mainMenu(person, people){
   switch(displayOption){
     case "info":
     // TODO: get person's info
-    
+      displayPerson(person[0]);
       break;
     case "family":
       let children = findChildren(person[0], people);
@@ -99,7 +99,6 @@ function mainMenu(person, people){
       console.log(parents);
       break;
     case "descendants":
-
       let descendants = findDescendants(person[0].id, people);
       printDescendants(descendants);
       break;
@@ -244,7 +243,12 @@ function displayPerson(person){
   // height, weight, age, name, occupation, eye color.
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
-  // TODO: finish getting the rest of the information to display.
+  personInfo += "Gender: " + person.gender + "\n";
+  personInfo += "Date of Birth: " + person.dob + "\n";
+  personInfo += "Height: " + person.height + "\n";
+  personInfo += "Weight: " + person.weight + "\n";
+  personInfo += "Eye Color: " + person.eyeColor + "\n";
+  personInfo += "Occupation: " + person.occupation + "\n";
   alert(personInfo);
 }
 
