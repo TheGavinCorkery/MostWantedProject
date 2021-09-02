@@ -16,6 +16,8 @@ function app(people){
     case 'no':
       let filteredArray = searchByCriteria(people);
       displayFilterNames(filteredArray);
+      searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+      searchResults = searchByName(people);
       break;
       default:
     app(people); // restart app
@@ -185,7 +187,6 @@ function searchByGender(people, namesOfPeople){
         return true;
       }
       else{
-        namesOfPeople.splice(element, 1);
         return false;
       }
     });
@@ -211,7 +212,6 @@ function searchByHeight(people, namesOfPeople){
         return true;
       }
       else{
-        namesOfPeople.splice(element, 1);
         return false;
       }
     });
@@ -237,7 +237,6 @@ function searchByWeight(people, namesOfPeople){
         return true;
       }
       else{
-        namesOfPeople.splice(element, 1);
         return false;
       }
     });
