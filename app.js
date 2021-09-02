@@ -91,14 +91,10 @@ function mainMenu(person, people){
       displayPerson(person[0]);
       break;
     case "family":
-      let children = findChildren(person[0], people);
-      console.log(children);
-      let spouse = findSpouse(person[0], people);
-      console.log(spouse);
       let parents = findParents(person[0], people);
-      console.log(parents);
+      let spouse = findSpouse(person[0], people);
       let siblings = findSiblings(person[0], people);
-      console.log(siblings);
+      printFamily(parents, spouse, siblings);
     break;
     case "descendants":
       let descendants = findDescendants(person[0].id, people);
@@ -291,6 +287,27 @@ function printDescendants(descendants) {
   alert(descendantsNames);
 }
 
+function printFamily(parents, spouse, siblings) {
+  let parentsNames = '';
+  let spouseName = `${spouse[0].firstName} ${spouse[0].lastName}`;
+  let siblingsNames = '';
+  for (let i = 0; i < parents.length; i++) {
+    if (i < parents.length - 1){
+      parentsNames += `${parents[i].firstName} ${parents[i].lastName}, `;
+    }else {
+      parentsNames += `${parents[i].firstName} ${parents[i].lastName}`;
+    }
+  }
+  for (let i = 0; i < siblings.length; i++) {
+    if (i < siblings.length - 1){
+      siblingsNames += `${siblings[i].firstName} ${siblings[i].lastName}, `;
+    }else {
+      siblingsNames += `${siblings[i].firstName} ${siblings[i].lastName}`;
+    }
+  }
+  alert('Parents: ' + parentsNames + '  Spouse: ' + spouseName + '  Siblings: ' + siblingsNames);
+}
+
 function findChildren (person, people) {
   let children = people.filter(function(element) {
     for (let i =0; i < element.parents.length; i++){
@@ -310,7 +327,7 @@ function findParents (person, people) {
         return true;
       } else {
         return false;
-      }
+      } 
   });
   return parents;
 };
@@ -328,11 +345,13 @@ function findSpouse (person, people) {
 
 function findSiblings (person, people) {
   let siblings = people.filter(function(element) {
+    for (let i =0; i < element.parents.length; i++){
       if (element.parents == person.parents){
         return true;
       } else {
         return false;
       }
+    }
   });
   return siblings;
 };
