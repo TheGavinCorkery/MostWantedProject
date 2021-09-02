@@ -127,7 +127,7 @@ function searchByCriteria(people) {
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
 function searchByEyeColor(people, namesOfPeople){
-  let eyeColor = promptFor("What color eyes do you want to look for? Enter 'black', 'brown', 'hazel', 'blue', 'green", eyeColorValid);
+  let eyeColor = promptFor("What color eyes do you want to look for? Enter 'black', 'brown', 'hazel', 'blue', 'green", eyeColorValid).toLowerCase();
   let peopleWithEyeColor;
   if (namesOfPeople.length > 0) {
     peopleWithEyeColor = namesOfPeople.filter(function(element) {
@@ -179,7 +179,7 @@ function searchByDOB(people, namesOfPeople) {
 //TODO: add other trait filter functions here.
 
 function searchByGender(people, namesOfPeople){
-   let gender = promptFor("What gender do you want to look for? Male or female", genderValidation);
+   let gender = promptFor("What gender do you want to look for? Male or female", genderValidation).toLowerCase();
    let genderOfPeople;
   if (namesOfPeople.length > 0) {
     genderOfPeople = namesOfPeople.filter(function(element) {
@@ -256,7 +256,7 @@ function searchByWeight(people, namesOfPeople){
  
    
 function searchByOccupation(people, namesOfPeople) {
-  let filterOccupation = promptFor("What occupation do you want to search for?", autoValid);
+  let filterOccupation = promptFor("What occupation do you want to search for?", occupationValid).toLowerCase();
   let peopleOfOccupation;
   if (namesOfPeople.length > 0) {
     peopleOfOccupation = namesOfPeople.filter(function(element) {
@@ -573,4 +573,13 @@ function heightValid(input) {
     }
   }
   return true;
+}
+
+function occupationValid(input) {
+  if (input === 'programmer' || input === 'assisstant' || input === 'landscaper' || input === 'nurse' || input === 'student' || input === 'architect' || input === 'doctor' || input === 'politician') {
+    return true;
+  }else {
+    alert('Please enter a valid option.');
+    return false;
+  }
 }
