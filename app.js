@@ -77,7 +77,7 @@ function searchByName(people){
 
   let firstName = promptFor("What is the person's first name?", nameValidation);
   let lastName = promptFor("What is the person's last name?", nameValidation);
-  
+
   let foundPerson = people.filter(function(potentialMatch){
     if(potentialMatch.firstName === firstName && potentialMatch.lastName === lastName){
       return true;
@@ -580,9 +580,6 @@ function occupationValid(input) {
 
 function showImage(gender) {
   let image = document.createElement("img");
-  image.src = 'https://images.pexels.com/photos/9345708/pexels-photo-9345708.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260';
-  image.style.height = '500px';
-  image.style.width = '300px';
 
   if (gender == 'male') {
     
