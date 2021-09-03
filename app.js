@@ -524,11 +524,24 @@ function filterOptionValid(input) {
     return false;
   }
 }
-function eyeColorValid(input) {
+function eyeColorValid(input){
+  let numbers = "0123456789`~!@#$%^&*()-_=+[{]}|;:',<.>/?";
+  if (input.length < 1 || input.length > 30) {
+    alert('Please enter a valid option.')
+    return false;
+  }
+  for (let i = 0; i < input.length; i++) {
+    for (let j = 0; j < numbers.length; j++) {
+      if(input[i] == numbers[j]) {
+        alert('Please enter a valid option.')
+        return false;
+      }
+    }
+  }
   if (input.toLowerCase() === 'black' || input.toLowerCase() === 'brown' || input.toLowerCase() === 'hazel' || input.toLowerCase() === 'blue' || input.toLowerCase() === 'green') {
     return true;
-  }else {
-    alert('Please enter a valid option.');
+  } else {
+    alert('That eye color is not in the database.');
     return false;
   }
 }
