@@ -527,7 +527,7 @@ function genderValidation(input) {
   }
 }
 function weightValidation(input) {
-  if (input >= 100 && input <= 256 && Number.isInteger(parseInt(input, 10)) === true) {
+  if (input >= 80 && input <= 800 && Number.isInteger(parseInt(input, 10)) === true) {
     return true;
   }else{
     alert('Please enter a valid weight.');
@@ -535,7 +535,7 @@ function weightValidation(input) {
   }
 }
 function displayValid(input) {
-  if (input === 'info' || input === 'descendants' || input === 'family' || input === 'restart' || input === 'quit') {
+  if (input.toLowerCase() === 'info' || input.toLowerCase() === 'descendants' || input.toLowerCase() === 'family' || input.toLowerCase() === 'restart' || input.toLowerCase() === 'quit') {
     return true;
   }else{
     alert('Please enter a valid option.');
@@ -544,7 +544,7 @@ function displayValid(input) {
 }
 
 function filterOptionValid(input) {
-  if (input === 'gender' || input === 'dob' || input === 'height' || input === 'weight' || input === 'eyecolor' || input === 'occupation') {
+  if (input.toLowerCase() === 'gender' || input.toLowerCase() === 'dob' || input.toLowerCase() === 'height' || input.toLowerCase() === 'weight' || input.toLowerCase() === 'eyecolor' || input.toLowerCase() === 'occupation') {
     return true;
   }else {
     alert('Please enter a valid option.');
@@ -552,7 +552,7 @@ function filterOptionValid(input) {
   }
 }
 function eyeColorValid(input) {
-  if (input === 'black' || input === 'brown' || input === 'hazel' || input === 'blue' || input === 'green') {
+  if (input.toLowerCase() === 'black' || input.toLowerCase() === 'brown' || input.toLowerCase() === 'hazel' || input.toLowerCase() === 'blue' || input.toLowerCase() === 'green') {
     return true;
   }else {
     alert('Please enter a valid option.');
@@ -583,7 +583,7 @@ function heightValid(input) {
 }
 
 function occupationValid(input) {
-  if (input === 'programmer' || input === 'assisstant' || input === 'landscaper' || input === 'nurse' || input === 'student' || input === 'architect' || input === 'doctor' || input === 'politician') {
+  if (input.toLowerCase() === 'programmer' || input.toLowerCase() === 'assisstant' || input.toLowerCase() === 'landscaper' || input.toLowerCase() === 'nurse' || input.toLowerCase() === 'student' || input.toLowerCase() === 'architect' || input.toLowerCase() === 'doctor' || input.toLowerCase() === 'politician') {
     return true;
   }else {
     alert('Please enter a valid option.');
