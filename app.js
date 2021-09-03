@@ -1,6 +1,7 @@
 "use strict"
 
 const container = document.getElementById('container')
+const results = document.getElementById('results');
 //Menu functions.
 //Used for the overall flow of the application.
 /////////////////////////////////////////////////////////////////
@@ -321,9 +322,10 @@ function displayPerson(person){
   personInfo += "<br>Eye Color: " + person.eyeColor + "\n";
   personInfo += "<br>Occupation: " + person.occupation + "\n";
 
-  let paragraph = document.createElement('p');
-  paragraph.innerHTML = personInfo;
-  document.body.appendChild(paragraph);
+  while (results.firstChild) {
+    results.removeChild(results.firstChild);
+  }
+  results.innerHTML = personInfo;
   // document.getElementById("descendants").innerHTML = personInfo;
   // alert(personInfo);
 }
@@ -361,14 +363,17 @@ function printDescendants(descendants, descendantsNames) {
     descendants.splice(0, 1);
     return printDescendants(descendants, descendantsNames);
   }else {
+    
     if (descendantsNames == '') {
-      let paragraph = document.createElement('p');
-      paragraph.innerHTML = 'This person has no descendants';
-      document.body.appendChild(paragraph);
+      while (results.firstChild) {
+        results.removeChild(results.firstChild);
+      }
+      results.innerHTML = 'This person has no descendants';
     }else {
-      let paragraph = document.createElement('p');
-      paragraph.innerHTML = descendantsNames;
-      document.body.appendChild(paragraph);
+      while (results.firstChild) {
+        results.removeChild(results.firstChild);
+      }
+      results.innerHTML = descendantsNames;
       // alert(descendantsNames);
     }
   }
@@ -407,12 +412,12 @@ function printFamily(parents, spouse, siblings) {
       }
     }
   }
-  
-  let paragraph = document.createElement('p');
-  paragraph.innerHTML = 'Parents: ' + parentsNames;
-  paragraph.innerHTML += '<br>Spouse: ' + spouseName;
-  paragraph.innerHTML += '<br>Siblings: ' + siblingsNames;
-  document.body.appendChild(paragraph);
+  while (results.firstChild) {
+    results.removeChild(results.firstChild);
+  }
+  results.innerHTML = 'Parents: ' + parentsNames;
+  results.innerHTML += '<br>Spouse: ' + spouseName;
+  results.innerHTML += '<br>Siblings: ' + siblingsNames;
   // alert('Parents: ' + parentsNames + '   Spouse: ' + spouseName + '   Siblings: ' + siblingsNames);
 }
 
