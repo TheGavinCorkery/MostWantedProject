@@ -111,6 +111,7 @@ function searchByCriteria(people) {
 
         break;
       case 'eyecolor':
+      case 'eye color':
         namesOfPeople = searchByEyeColor(people, namesOfPeople);
         
         break;
@@ -545,7 +546,7 @@ function displayValid(input) {
 }
 
 function filterOptionValid(input) {
-  if (input.toLowerCase() === 'gender' || input.toLowerCase() === 'dob' || input.toLowerCase() === 'height' || input.toLowerCase() === 'weight' || input.toLowerCase() === 'eyecolor' || input.toLowerCase() === 'occupation') {
+  if (input.toLowerCase() === 'gender' || input.toLowerCase() === 'dob' || input.toLowerCase() === 'height' || input.toLowerCase() === 'weight' || input.toLowerCase() === 'eyecolor' || input.toLowerCase() === 'eye color' || input.toLowerCase() === 'occupation') {
     return true;
   }else {
     alert('Please enter a valid option.');
