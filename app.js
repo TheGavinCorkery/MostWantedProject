@@ -74,8 +74,8 @@ function mainMenu(person, people){
 //nearly finished function used to search through an array of people to find matching first and last name and return a SINGLE person object.
 function searchByName(people){
 
-  let firstName = promptFor("What is the person's first name?", firstNameValidation);
-  let lastName = promptFor("What is the person's last name?", lastNameValidation);
+  let firstName = promptFor("What is the person's first name?", nameValidation);
+  let lastName = promptFor("What is the person's last name?", nameValidation);
 
   let foundPerson = people.filter(function(potentialMatch){
     if(potentialMatch.firstName === firstName && potentialMatch.lastName === lastName){
@@ -393,19 +393,6 @@ function printFamily(parents, spouse, siblings) {
   alert('Parents: ' + parentsNames + '   Spouse: ' + spouseName + '   Siblings: ' + siblingsNames);
 }
 
-function findChildren (person, people) {
-  let children = people.filter(function(element) {
-    for (let i =0; i < element.parents.length; i++){
-      if (element.parents[i] == person.id){
-        return true;
-      } else {
-        return false;
-      }
-    }
-  });
-  return children;
-};
-
 function findParents (person, people) {
   let parents = people.filter(function(element) {
       if (element.id == person.parents){
@@ -476,27 +463,13 @@ function yesNo(input){
 
 // helper function to pass in as default promptFor validation.
 //this will always return true for all inputs.
-function autoValid(input){
-  return true; // default validation only
-}
+// function autoValid(input){
+//   return true; // default validation only
+// }
 
 //Unfinished validation function you can use for any of your custom validation callbacks.
 //can be used for things like eye color validation for example.
-function firstNameValidation(input){
-  let numbers = "0123456789`~!@#$%^&*()-_=+[{]}|;:',<.>/?";
-  if (input.length < 1 || input.length > 50) {
-    return false;
-  }
-  for (let i = 0; i < input.length; i++) {
-    for (let j = 0; j < numbers.length; j++) {
-      if(input[i] == numbers[j]) {
-        return false;
-      }
-    }
-  }
-  return true;
-}
-function lastNameValidation(input){
+function nameValidation(input){
   let numbers = "0123456789`~!@#$%^&*()-_=+[{]}|;:',<.>/?";
   if (input.length < 1 || input.length > 50) {
     return false;
