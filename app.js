@@ -38,32 +38,32 @@ function mainMenu(person, people){
 
   let displayOption = promptFor("Found " + person[0].firstName + " " + person[0].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", displayValid);
 
-  switch(displayOption){
-    case "info":
-    // TODO: get person's info
-      displayPerson(person[0]);
-      showImage(person[0].gender);
-      break;
-    case "family":
-      let parents = findParents(person[0], people);
-      let spouse = findSpouse(person[0], people);
-      let siblings = findSiblings(person[0], people);
-      printFamily(parents, spouse, siblings);
-    break;
-    case "descendants":
-      let descendants = findDescendants(person[0].id, people);
-      let descendantsNames = '';
-      printDescendants(descendants, descendantsNames);
-      break;
-    case "restart":
-      app(people); // restart
-      break;
-    case "quit":
-      return; // stop execution
-    default:
-      return mainMenu(person, people); // ask again
-  }
-}
+   switch(displayOption){
+     case "info":
+     // TODO: get person's info
+       displayPerson(person[0]);
+       showImage(person[0].gender);
+       break;
+     case "family":
+       let parents = findParents(person[0], people);
+       let spouse = findSpouse(person[0], people);
+       let siblings = findSiblings(person[0], people);
+       printFamily(parents, spouse, siblings);
+     break;
+     case "descendants":
+       let descendants = findDescendants(person[0].id, people);
+       let descendantsNames = '';
+       printDescendants(descendants, descendantsNames);
+       break;
+     case "restart":
+       app(people); // restart
+       break;
+     case "quit":
+       return; // stop execution
+     default:
+       return mainMenu(person, people); // ask again
+   }
+ }
 
 //#endregion
 
@@ -289,6 +289,10 @@ function searchByOccupation(people, namesOfPeople) {
 /////////////////////////////////////////////////////////////////
 //#region 
 
+function display(functToRun) {
+  functToRun();
+}
+
 function displayFilterNames(filteredArray) {
   let filteredArrayNames = '';
   for (let i = 0; i < filteredArray.length; i++) {
@@ -307,15 +311,21 @@ function displayPeople(people){
 function displayPerson(person){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
-  let personInfo = "First Name: " + person.firstName + "\n";
-  personInfo += "Last Name: " + person.lastName + "\n";
-  personInfo += "Gender: " + person.gender + "\n";
-  personInfo += "Date of Birth: " + person.dob + "\n";
-  personInfo += "Height: " + person.height + "\n";
-  personInfo += "Weight: " + person.weight + "\n";
-  personInfo += "Eye Color: " + person.eyeColor + "\n";
-  personInfo += "Occupation: " + person.occupation + "\n";
-  alert(personInfo);
+
+  let personInfo = "<br>First Name: " + person.firstName + "\n";
+  personInfo += "<br>Last Name: " + person.lastName + "\n";
+  personInfo += "<br>Gender: " + person.gender + "\n";
+  personInfo += "<br>Date of Birth: " + person.dob + "\n";
+  personInfo += "<br>Height: " + person.height + "\n";
+  personInfo += "<br>Weight: " + person.weight + "\n";
+  personInfo += "<br>Eye Color: " + person.eyeColor + "\n";
+  personInfo += "<br>Occupation: " + person.occupation + "\n";
+
+  let paragraph = document.createElement('p');
+  paragraph.innerHTML = personInfo;
+  document.body.appendChild(paragraph);
+  // document.getElementById("descendants").innerHTML = personInfo;
+  // alert(personInfo);
 }
 
 
@@ -352,18 +362,24 @@ function printDescendants(descendants, descendantsNames) {
     return printDescendants(descendants, descendantsNames);
   }else {
     if (descendantsNames == '') {
-      alert("This person has no descendants.");
+      let paragraph = document.createElement('p');
+      paragraph.innerHTML = 'This person has no descendants';
+      document.body.appendChild(paragraph);
     }else {
-      alert(descendantsNames);
+      let paragraph = document.createElement('p');
+      paragraph.innerHTML = descendantsNames;
+      document.body.appendChild(paragraph);
+      // alert(descendantsNames);
     }
   }
-  
+
 }
 
 function printFamily(parents, spouse, siblings) {
   let parentsNames = '';
   let spouseName = '';
   let siblingsNames = '';
+  
   if (parents.length == 0) {
     parentsNames = 'None';
   } else {
@@ -391,7 +407,13 @@ function printFamily(parents, spouse, siblings) {
       }
     }
   }
-  alert('Parents: ' + parentsNames + '   Spouse: ' + spouseName + '   Siblings: ' + siblingsNames);
+  
+  let paragraph = document.createElement('p');
+  paragraph.innerHTML = 'Parents: ' + parentsNames;
+  paragraph.innerHTML += '<br>Spouse: ' + spouseName;
+  paragraph.innerHTML += '<br>Siblings: ' + siblingsNames;
+  document.body.appendChild(paragraph);
+  // alert('Parents: ' + parentsNames + '   Spouse: ' + spouseName + '   Siblings: ' + siblingsNames);
 }
 
 function findParents (person, people) {
