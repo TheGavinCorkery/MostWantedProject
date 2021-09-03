@@ -1,6 +1,6 @@
 "use strict"
 
-
+const container = document.getElementById('container')
 //Menu functions.
 //Used for the overall flow of the application.
 /////////////////////////////////////////////////////////////////
@@ -580,7 +580,9 @@ function occupationValid(input) {
 
 function showImage(gender) {
   let image = document.createElement("img");
-
+  while (container.firstChild) {
+    container.removeChild(container.firstChild);
+  }
   if (gender == 'male') {
     
     image.src = 'https://images.pexels.com/photos/775358/pexels-photo-775358.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260';
@@ -592,6 +594,6 @@ function showImage(gender) {
     image.style.width = '300px';
   }
 
-  document.body.appendChild(image);
+  container.appendChild(image);
 
 }
