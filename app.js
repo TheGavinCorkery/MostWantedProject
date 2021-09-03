@@ -51,7 +51,8 @@ function mainMenu(person, people){
     break;
     case "descendants":
       let descendants = findDescendants(person[0].id, people);
-      printDescendants(descendants);
+      let descendantsNames = '';
+      printDescendants(descendants, descendantsNames);
       break;
     case "restart":
       app(people); // restart
@@ -342,20 +343,20 @@ function findDescendants (parentId, people) {
   return arrayOfDescendants;
 }
 
-function printDescendants(descendants) {
-  let descendantsNames = '';
-  for (let i = 0; i < descendants.length; i++) {
-    if (i < descendants.length - 1){
-      descendantsNames += `${descendants[i].firstName} ${descendants[i].lastName}, `;
+function printDescendants(descendants, descendantsNames) {
+
+  if (descendants.length > 0) {
+    descendantsNames += `${descendants[0].firstName} ${descendants[0].lastName}, `;
+    descendants.splice(0, 1);
+    return printDescendants(descendants, descendantsNames);
+  }else {
+    if (descendantsNames == '') {
+      alert("This person has no descendants.");
     }else {
-      descendantsNames += `${descendants[i].firstName} ${descendants[i].lastName}`;
+      alert(descendantsNames);
     }
   }
-  if (descendants.length == 0) {
-    alert('This person has no descendants');
-  }else {
-    alert(descendantsNames);
-  }
+  
 }
 
 function printFamily(parents, spouse, siblings) {
