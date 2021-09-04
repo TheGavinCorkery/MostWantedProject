@@ -563,8 +563,13 @@ function dobValid(input) {
   }
   for (let i = input.length - 1; i >= input.length - 4; i--) {
     if (input.charCodeAt(i) > 57 || input.charCodeAt(i) < 48) {
+      alert('Please enter a valid date of birth.');
       return false;
     }
+  }
+  if (input[input.length - 5] != '/') {
+    alert('Please enter a valid date of birth.');
+    return false;
   }
   return true;
   
