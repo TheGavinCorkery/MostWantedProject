@@ -590,7 +590,7 @@ function heightValid(input) {
 }
 
 function occupationValid(input) {
-  if (input.toLowerCase() === 'programmer' || input.toLowerCase() === 'assisstant' || input.toLowerCase() === 'landscaper' || input.toLowerCase() === 'nurse' || input.toLowerCase() === 'student' || input.toLowerCase() === 'architect' || input.toLowerCase() === 'doctor' || input.toLowerCase() === 'politician') {
+  if (input.toLowerCase() === 'programmer' || input.toLowerCase() === 'assistant' || input.toLowerCase() === 'landscaper' || input.toLowerCase() === 'nurse' || input.toLowerCase() === 'student' || input.toLowerCase() === 'architect' || input.toLowerCase() === 'doctor' || input.toLowerCase() === 'politician') {
     return true;
   } else {
     alert('Please enter a valid option.');
